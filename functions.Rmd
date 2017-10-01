@@ -119,11 +119,11 @@ WCGS.new[,i] <- standardize.me(WCGS.new[ , i])
 
 ```
 D. What should the mean and standard deviation of all your new standardized variables be? Test your prediction by running a loop
-```{r}
+```{r}   
 for(i in seq_along(WCGS.new)) {
  print(paste("The mean of column number", i, "is", round(mean(WCGS.new[,i]), 2), "and the standard deviation is", round(sd(WCGS.new[,i]), 2)))
 }
-
+# didn't understand well:( 
 ```
 
 
@@ -132,6 +132,28 @@ for(i in seq_along(WCGS.new)) {
 
 A. Using a loop, calculate the mean weight of the subjects separated by the type of CHD they have.
 
+```{r}
+typchd69_weight.df <- data.frame("typchd69" = unique(wcgs$typchd69), "mean_weight"=NA, stringsAsFactors = F)
+
+for(i in 1:nrow(typchd69_weight.df)) {
+ typchd69.i <- typchd69_weight.df$typchd69[i]
+ mean_weight.i <- mean(subset(wcgs, typchd69 == typchd69.i)$weight)   
+ typchd69_weight.df$mean_weight[i] <- mean_weight.i
+}
+
+typchd69_weight.df                    # answer was learned form others work. what i tried to do:
+                                      #wcgs.wCHD <- wcgs[c("typchd69", "weight")]
+                                      #for (i in 1:length(wcgs.wCHD[weight]))
+
+```
+
 
 B. Now do the same thing, but now don’t use a loop
+```{r}
+wcgs %>%
+ group_by(typchd69) %>%
+ summarise(mean(weight))
+
+## or using, aggregate(weight ~ typchd69, data = wcgs, FUN = mean)
+```
 

@@ -1,8 +1,11 @@
 ---
 title: "Functions - Pre-Class Work"
 author: "Nour Audi"
-date: "September 29, 2017"
-output: html_document
+date: "October 1, 2017"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -149,7 +152,7 @@ typchd69_weight.df                    # answer was learned form others work. wha
 
 
 B. Now do the same thing, but now don’t use a loop
-```{r}
+```{r,eval=FALSE}
 wcgs %>%
  group_by(typchd69) %>%
  summarise(mean(weight))
